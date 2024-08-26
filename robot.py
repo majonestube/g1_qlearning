@@ -8,18 +8,20 @@ class Robot:
         # Define R- and Q-matrices here.
         pass
 
-    # Returns the current column of the robot (0-5).
     def get_x(self):
+        # Return the current column of the robot, should be in the range 0-5.
         return 3
 
-    # Returns the current row of the robot (0-5).
     def get_y(self):
+        # Return the current row of the robot, should be in the range 0-5.
         return 0
 
     def get_next_state_mc(self):
+        # Return the next state based on Monte Carlo.
         pass
 
-    def get_next_state_eg(self): # Only implement this if using "epsilon-greedy" policy.
+    def get_next_state_eg(self):
+        # Return the next state based on Epsilon-greedy.
         pass
 
     def monte_carlo_exploration(self):
