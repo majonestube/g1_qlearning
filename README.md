@@ -10,7 +10,8 @@ Rundt om i terrenget er det ulike hindringer som roboten må ta hensyn til.
 ![image](https://github.com/user-attachments/assets/1da1c734-8b00-4219-af6e-8ac2ab13dec3)
 
 Roboten klarer å kjøre i bratt terreng, men det krever mye energi og er forbundet med høyere risiko. Roboten er vanntett, men å kjøre gjennom vann krever enda mer energi, og tar svært lang tid sammenliknet med å kjøre på land eller i bratt terreng.
-Basert på disse opplysningene kan vi forenkle kartet til følgende figur:
+Basert på disse opplysningene kan vi forenkle kartet til følgende figur.
+
 ![image](https://github.com/user-attachments/assets/be391153-f986-43b5-8a56-152ca3fdb039)
 
 * Røde ruter er fjell og bratt terreng, og mørkeblå ruter er vann. Hvite ruter er forbundet med lav eller ingen risiko.
