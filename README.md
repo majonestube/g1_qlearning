@@ -18,9 +18,9 @@ Basert på disse opplysningene kan vi forenkle kartet til følgende figur.
 * Roboten styres med et API som tillater følgende bevegelser: "opp", "ned", "høyre" og "venstre". Hvis roboten står i rute "A4" og gjør bevegelsen "ned" havner den altså i rute "B4" Roboten kan ikke bevege seg diagonalt.
 
 # Oppgaver
-Fullfør robot-klassen med tilhørende reward-matrise for kartet som er oppgitt. Gjør egne vurderinger angående hvilke verdier som bør brukes i matrisen, og begrunn disse.
-Implementer Monte Carlo for å velge en av fire mulige «actions» for tilstanden roboten står i (opp, ned, høyre, venstre). Dersom roboten står i kanten av rutenettet og prøver å gå ut av kartet, skal den bli stående i samme rute.
-Utfør Monte Carlo-simulering for å finne den tryggeste stien fra start til mål. Plasser roboten i rute A4 og avslutt når den når rute F1. Metoden skal beregne total akkumulert belønning for hver simulering basert på reward-matrisen du satte opp. Stien med høyest belønning/lavest straff vil være den tryggeste ruten. Kjør simuleringen minst 10 ganger og beskriv den beste stien roboten finner (gjerne med en figur).
-Utvid roboten til å bruke Q-learning for å utforske kartet og lære seg den tryggeste stien fra A4 til F1. Husk Q-matrise og policy-funksjon.
-Bruk pygame for å visualisere den tryggeste stien fra start til mål.
-Eksperimenter med å kjøre Q-learning-programmet med ulike antall episoder (og evt. ulike varianter av policy), og vis hvor god rute roboten finner for hvert eksperiment. Klarer den å finne den optimale ruta? Det kan hende du må justere reward-matrisa for å få gode resultater.
+* Fullfør robot-klassen med tilhørende reward-matrise for kartet som er oppgitt. Gjør egne vurderinger angående hvilke verdier som bør brukes i matrisen, og begrunn disse.
+* Implementer Monte Carlo for å velge en av fire mulige «actions» for tilstanden roboten står i (opp, ned, høyre, venstre). Dersom roboten står i kanten av rutenettet og prøver å gå ut av kartet, skal den bli stående i samme rute.
+* Utfør Monte Carlo-simulering for å finne den tryggeste stien fra start til mål. Plasser roboten i rute A4 og avslutt når den når rute F1. Metoden skal beregne total akkumulert belønning for hver simulering basert på reward-matrisen du satte opp. Stien med høyest belønning/lavest straff vil være den tryggeste ruten. Kjør simuleringen minst 10 ganger og beskriv den beste stien roboten finner (gjerne med en figur).
+* Utvid roboten til å bruke Q-learning for å utforske kartet og lære seg den tryggeste stien fra A4 til F1. Husk Q-matrise og policy-funksjon.
+* Bruk pygame for å visualisere den tryggeste stien fra start til mål.
+* Eksperimenter med å kjøre Q-learning-programmet med ulike antall episoder (og evt. ulike varianter av policy), og vis hvor god rute roboten finner for hvert eksperiment. Klarer den å finne den optimale ruta? Det kan hende du må justere reward-matrisa for å få gode resultater.
