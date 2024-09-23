@@ -1,7 +1,7 @@
 
 # Karaktersatt oppgave 1 | DTE-2602
 
-For enkelhets skyld er terrenget delt opp som et rutenett med 36 tilstander. Roboten skal starte i A4 og skal prøve å finne en trygg vei frem til F1.
+I denne oppgaven skal du lage en simulering av en robot som utforsker et ukjent terreng. For enkelhets skyld er terrenget delt opp som et rutenett med 36 tilstander. Roboten skal starte i A4 og skal prøve å finne en trygg vei frem til F1.
 
 ![image](https://github.com/user-attachments/assets/d30a8ce9-26ed-45d2-a963-ef51c33d1c7a)
 
