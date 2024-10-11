@@ -9,7 +9,7 @@ class Robot:
     def __init__(self):
         # Define R- and Q-matrices here.
         self.reward_matrix = [[-50, -100, -100, 0, 0, -50],
-                              [-50, -50, 0, 100, 0, 0],
+                              [-50, -50, 0, -100, 0, 0],
                               [-100, 0, 0, -100, 0, -100],
                               [-100, 0, 0, 0, 0, 0],
                               [-100, 0, -100, 0, -100, 0],
@@ -17,8 +17,8 @@ class Robot:
         self.q_matrix = [[0] * 6 for _ in range(6)]
 
         # går til en gitt start, A4
-        self.row = 1
-        self.column = 4
+        self.row = 0
+        self.column = 3
         self.position = (self.row, self.column)
 
     def get_column(self):
@@ -40,22 +40,22 @@ class Robot:
 
         direction = randint(1,4)
         if direction == 1:
-            if self.row == 1:
+            if self.row == 0:
                 pass
             else: 
                 self.row -= 1
         elif direction == 2:
-            if self.column == 1:
+            if self.column == 0:
                 pass
             else: 
                 self.column -= 1
         elif direction == 3:
-            if self.column == 6:
+            if self.column == 5:
                 pass
             else:
                 self.column += 1
         else:
-            if self.row == 6:
+            if self.row == 5:
                 pass
             else:
                 self.row += 1
@@ -70,22 +70,25 @@ class Robot:
     def monte_carlo_exploration(self, trials):
         routes = []
         rewards = []
-        for trial in range(trials):
-            robot = Robot()
+        for _ in range(trials):
+            self.column = 3
+            self.row = 0
             route = []
             reward = []
             done = False
             while not done:
-                current_position = (robot.get_row(), robot.get_column())
-                print('current position: ', current_position)
-                current_reward = robot.reward_matrix[robot.get_row()][robot.get_column()]
+                current_position = (self.row, self.column)
+                current_reward = self.reward_matrix[self.row][self.column]
                 route.append(current_position)
                 reward.append(current_reward)
-                current_position = robot.get_next_state_mc()
-                done = current_position == (6,1)
+                current_position = self.get_next_state_mc()
+                done = (self.row == 5 and self.column == 0)
             routes.append(route)
             rewards.append(sum(reward))
-            print(routes, rewards)
+        maximum_reward = max(rewards)
+        index = rewards.index(maximum_reward)
+        return f'Highest reward: {maximum_reward}\
+                Route: {routes[index]}'
         
                 
 
