@@ -8,12 +8,48 @@ class Robot:
 
     def __init__(self):
         # Define R- and Q-matrices here.
-        self.reward_matrix = [[-50, -100, -100, 0, 0, -50],
-                              [-50, -50, 0, -100, 0, 0],
-                              [-100, 0, 0, -100, 0, -100],
-                              [-100, 0, 0, 0, 0, 0],
-                              [-100, 0, -100, 0, -100, 0],
-                              [500, -50, -50, -50, -50, -50]]
+        self.reward_matrix = [[[-5000, -5000, -100, -50],
+                              [-5000, -50, -100, -50],
+                              [-5000, -100, 0, 0],
+                              [-5000, -100, 0, -100],
+                              [-5000, 0, 0, -50],
+                              [-5000, 0, -5000, 0]],
+
+                              [[-50, -5000, -50, -100], 
+                              [-100, -50, 0, 0],
+                              [-100, -50, -100, 0],
+                              [0, 0, 0, -100],
+                              [0, -100, 0, 0],
+                              [-50, 0, -5000, -100]],
+
+                              [[-50, -5000, 0, -100],
+                              [-50, -100, 0, 0],
+                              [0, 0, -100, 0],
+                              [-100, 0, 0, 0],
+                              [0, -100, -100, 0],
+                              [0, 0, -5000, 0]],
+
+                              [[-100, -5000, 0, -100],
+                              [0, -100, 0, 0],
+                              [0, 0, 0, -100],
+                              [-100, 0, 0, 0],
+                              [0, 0, 0, -100] ,
+                              [-100, 0, -5000, -50]],
+
+                              [[-100, -5000, 0, 500],
+                              [0, -100, -100, -50],
+                              [0, 0, 0, -50],
+                              [0, -100, -100, -50],
+                              [0, 0, 0, -50],
+                              [0, -100, -5000, -50]],
+
+                              [[-100, -5000, -50, -5000],
+                              [0, 500, -50, -5000],
+                              [-100, -50, -50, -5000],
+                              [0, -50, -50, -5000],
+                              [-100, -50, -50, -5000],
+                              [0, -50, -5000, -5000]]]
+        
         self.q_matrix = [[0] * 6 for _ in range(6)]
 
         # går til en gitt start, A4
@@ -32,24 +68,24 @@ class Robot:
     def get_next_state_mc(self):
         # Return the next state based on Monte Carlo.
         """
-        north = 1
-        west = 2
-        east = 3
-        south = 4
+        north = 0
+        west = 1
+        east = 2
+        south = 3
         """
 
-        direction = randint(1,4)
-        if direction == 1:
+        direction = randint(0,3)
+        if direction == 0:
             if self.row == 0:
                 pass
             else: 
                 self.row -= 1
-        elif direction == 2:
+        elif direction == 1:
             if self.column == 0:
                 pass
             else: 
                 self.column -= 1
-        elif direction == 3:
+        elif direction == 2:
             if self.column == 5:
                 pass
             else:
@@ -60,7 +96,7 @@ class Robot:
             else:
                 self.row += 1
 
-        return self.position
+        return direction
         
 
     def get_next_state_eg(self):
@@ -77,11 +113,10 @@ class Robot:
             reward = []
             done = False
             while not done:
-                current_position = (self.row, self.column)
-                current_reward = self.reward_matrix[self.row][self.column]
-                route.append(current_position)
-                reward.append(current_reward)
-                current_position = self.get_next_state_mc()
+                direction = self.get_next_state_mc()
+                new_reward = self.reward_matrix[self.row][self.column][direction]
+                route.append(tuple((self.row, self.column)))
+                reward.append(new_reward)
                 done = (self.row == 5 and self.column == 0)
             routes.append(route)
             rewards.append(sum(reward))
