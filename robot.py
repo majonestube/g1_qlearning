@@ -50,7 +50,7 @@ class Robot:
                               [-100, -50, -50, -5000],
                               [0, -50, -5000, -5000]]]
         
-        self.q_matrix = [[0] * 6 for _ in range(6)]
+        self.q_matrix = [[[0] * 4 for _ in range(6)] for x in range(6)]
 
         # går til en gitt start, A4
         self.row = 0
@@ -101,7 +101,63 @@ class Robot:
 
     def get_next_state_eg(self):
         # Return the next state based on Epsilon-greedy.
-        pass
+        # Velger 0.1 som epsilon
+        e = 10
+        n = randint(1,100)
+        if n < e:
+            direction = randint(0,3)
+        else: 
+            optimal_action = max(self.q_matrix[self.row][self.column])
+            direction = self.q_matrix[self.row][self.column].index(optimal_action)
+
+        if direction == 0:
+            if self.row == 0:
+                pass
+            else: 
+                self.row -= 1
+        elif direction == 1:
+            if self.column == 0:
+                pass
+            else: 
+                self.column -= 1
+        elif direction == 2:
+            if self.column == 5:
+                pass
+            else:
+                self.column += 1
+        else:
+            if self.row == 5:
+                pass
+            else:
+                self.row += 1
+        
+        return direction
+    
+    def changed_position(self, direction):
+        if direction == 0:
+            if self.row == 0:
+                return False
+            else: 
+                self.row -= 1
+                return True
+        elif direction == 1:
+            if self.column == 0:
+                return False
+            else: 
+                self.column -= 1
+                return True
+        elif direction == 2:
+            if self.column == 5:
+                return False
+            else:
+                self.column += 1
+                return True
+        else:
+            if self.row == 5:
+                return False
+            else:
+                self.row += 1
+                return True
 
     def monte_carlo_exploration(self, trials):
         routes = []
@@ -110,16 +166,16 @@ class Robot:
             self.column = 3
             self.row = 0
             route = []
-            reward = []
+            reward = 0
             done = False
             while not done:
                 direction = self.get_next_state_mc()
                 new_reward = self.reward_matrix[self.row][self.column][direction]
                 route.append(tuple((self.row, self.column)))
-                reward.append(new_reward)
+                reward += new_reward
                 done = (self.row == 5 and self.column == 0)
             routes.append(route)
-            rewards.append(sum(reward))
+            rewards.append(reward)
         maximum_reward = max(rewards)
         index = rewards.index(maximum_reward)
         return f'Highest reward: {maximum_reward}\
@@ -127,8 +183,40 @@ class Robot:
         
                 
 
-    def q_learning(self):
-        pass
+    def q_learning(self, epochs):
+        alpha = 1
+        gamma = 0.8
+        for _ in range(epochs):
+            self.column = 3
+            self.row = 0
+            route = []
+            done = False
+            while not done:
+                direction = self.get_next_state_eg()
+                current_reward = self.reward_matrix[self.row][self.column][direction]
+                next_state = 
+
+
+            routes = []
+            rewards = []
+            for _ in range(trials):
+                self.column = 3
+                self.row = 0
+                route = []
+                reward = 0
+                done = False
+                while not done:
+                    direction = self.get_next_state_mc()
+                    new_reward = self.reward_matrix[self.row][self.column][direction]
+                    route.append(tuple((self.row, self.column)))
+                    reward += new_reward
+                    done = (self.row == 5 and self.column == 0)
+                routes.append(route)
+                rewards.append(reward)
+            maximum_reward = max(rewards)
+            index = rewards.index(maximum_reward)
+            return f'Highest reward: {maximum_reward}\
+                    Route: {routes[index]}'
         
     def one_step_q_learning(self):
         # Get action based on policy
@@ -140,7 +228,7 @@ class Robot:
     
     def has_reached_goal(self):
         # Return 'True' if the robot is in the goal state.
-        pass
+        return (self.row == 5 and self.column == 0)
         
     def reset_random(self):
         # Place the robot in a new random state.
