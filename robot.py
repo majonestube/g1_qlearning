@@ -69,30 +69,7 @@ class Robot:
 
     def get_next_state_mc(self):
         # Return the next state based on Monte Carlo.
-        direction = random.randint(0,3)
-
-        if direction == 0:
-            if self.row == 0:
-                pass
-            else: 
-                self.row -= 1
-        elif direction == 1:
-            if self.column == 0:
-                pass
-            else: 
-                self.column -= 1
-        elif direction == 2:
-            if self.column == 5:
-                pass
-            else:
-                self.column += 1
-        else:
-            if self.row == 5:
-                pass
-            else:
-                self.row += 1
-
-        return direction
+        return random.randint(0,3)
         
 
     def get_next_state_eg(self, e):
@@ -144,6 +121,7 @@ class Robot:
             done = False
             while not done:
                 direction = self.get_next_state_mc()
+                self.move(direction)
                 new_reward = self.reward_matrix[self.row][self.column][direction]
                 route.append(tuple((self.row, self.column)))
                 reward += new_reward
@@ -160,13 +138,14 @@ class Robot:
     def q_learning(self, epochs):
         alpha = 0.3
         gamma = 0.8
+        epsilon = 10
         for _ in range(epochs):
             self.reset()
             done = False
             while not done:
                 current_row = self.row
                 current_column = self.column
-                direction = self.get_next_state_eg(50)
+                direction = self.get_next_state_eg(epsilon)
                 current_reward = self.reward_matrix[current_row][current_column][direction]
                 self.move(direction)
                 q = max(self.q_matrix[self.row][self.column])
@@ -184,9 +163,10 @@ class Robot:
         # Go to the next state
         alpha = 0.3
         gamma = 0.8
+        epsilon = 10
         current_row = self.row
         current_column = self.column
-        direction = self.get_next_state_eg(10)
+        direction = self.get_next_state_eg(epsilon)
         current_reward = self.reward_matrix[current_row][current_column][direction]
         self.move(direction)
         q = max(self.q_matrix[self.row][self.column])
