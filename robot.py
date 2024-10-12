@@ -7,12 +7,15 @@ import time
 class Robot:
 
     def __init__(self):
-        # Define R- and Q-matrices here.
+        # Første indeks er rad i kartet
+        # Andre indeks er kolonne i kartet 
+        # Verdiene i selve listen er tilhørende reward til ulike actions
+        # Rekkefølge på actions: nord, vest, øst, sør 
         self.reward_matrix = [[[-500, -500, -100, -50],
                               [-500, -50, -100, -50],
                               [-500, -100, 0, 0],
                               [-500, -100, 0, -100],
-                              [-500, 0, 0, -50],
+                              [-500, 0, -50, 0],
                               [-500, 0, -500, 0]],
 
                               [[-50, -500, -50, -100], 
@@ -53,16 +56,15 @@ class Robot:
         self.q_matrix = [[[0] * 4 for _ in range(6)] for x in range(6)]
 
         # går til en gitt start, A4
-        # self.position = tuple((0, 3))
         self.row = 0
         self.column = 3
 
     def get_column(self):
-        # Return the current column of the robot, should be in the range 0-5.
+        # Returnerer kolonnen til roboten
         return self.column
 
     def get_row(self):
-        # Return the current row of the robot, should be in the range 0-5.
+        # Returnerer raden til roboten 
         return self.row
 
     def get_next_state_mc(self):
@@ -193,8 +195,6 @@ class Robot:
                 + alpha * (current_reward + gamma * q)
         return tuple((self.row, self.column))
 
-
-        
     
     def has_reached_goal(self):
         # Return 'True' if the robot is in the goal state.
@@ -204,8 +204,3 @@ class Robot:
         # Place the robot in a new initial state.
         self.row = 0
         self.column = 3
-
-    def greedy_path(self):
-        pass
-
-# Feel free to add additional classes / methods / functions to solve the assignment...

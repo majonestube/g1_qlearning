@@ -18,7 +18,7 @@ if __name__ == "__main__":
     simulator_speed = 10 # Adjust this value to change the speed of the visualiztion. Bigger number = more faster...
 
     bg_image = pygame.image.load("grid.jpg") # Loads the simplified grid image.
-    #bg_image = pygame.image.load("map.jpg") # Uncomment this to load the terrain map image.
+    # bg_image = pygame.image.load("map.jpg") # Uncomment this to load the terrain map image.
 
     robot = Robot() # Create a new robot.
     robot.reset()
