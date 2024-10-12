@@ -21,7 +21,7 @@ if __name__ == "__main__":
     #bg_image = pygame.image.load("map.jpg") # Uncomment this to load the terrain map image.
 
     robot = Robot() # Create a new robot.
-    robot.reset_random()
+    robot.reset()
 
     # Pygame boilerplate code.
     running = True
